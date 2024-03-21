@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContaController;
+use App\Http\Controllers\VacationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/create-vacation', [VacationController::class, 'create'])->name('vacation.create');
+Route::post('/store-vacation', [VacationController::class, 'store'])->name('vacation.store');
+
 
 // CONTAS
 Route::get('/index-conta', [ContaController::class, 'index'])->name('conta.index');

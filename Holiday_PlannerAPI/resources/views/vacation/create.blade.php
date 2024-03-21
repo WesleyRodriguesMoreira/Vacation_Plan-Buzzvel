@@ -3,7 +3,7 @@
 @section('content')
     <div class="card mt-4 mb-4 border-light shadow">
         <div class="card-header d-flex justify-content-between">
-            <span>Cadastrar Conta</span>
+            <span>Vacation Plan Registration</span>
             <span>
                 <a href="{{ route('conta.index') }}" class="btn btn-info btn-sm ">Listar</a>
             </span>
@@ -13,29 +13,30 @@
         <x-alert />
 
         <div class="card-body">
-
-            <form action="{{ route('conta.store') }}" method="POST" class="row g-3">
+            <form action="{{ route('vacation.store') }}" method="POST" class="row g-3">
                 @csrf
 
                 <div class="col-md-12 col-sm-12">
-                    <label for="nome" class="form-label">Nome</label>
-                    <input type="text" name="nome" class="form-control" id="nome" placeholder="Nome da conta"
-                        value="{{ old('nome') }}">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" name="title" class="form-control" id="title" placeholder="Plan Title" value="{{ old('title') }}">
+                </div>
+
+                <div class="col-md-12 col-sm-12">
+                    <label for="local" class="form-label">Local</label>
+                    <input type="text" name="local" class="form-control" id="local" placeholder="Vacation spot" value="{{ old('local') }}">
                 </div>
 
                 <div class="col-md-4 col-sm-12">
-                    <label for="valor" class="form-label">Valor</label>
-                    <input type="text" name="valor" class="form-control" id="valor" placeholder="Valor da conta"
-                        value="{{ old('valor') }}">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea name="description" id="description" cols="30" rows="10" class="form-control" placeholder="Plan Description" value="{{ old('valor') }}"></textarea>
                 </div>
 
                 <div class="col-md-4 col-sm-12">
-                    <label for="vencimento" class="form-label">Vencimento</label>
-                    <input type="date" name="vencimento" class="form-control" id="vencimento"
-                        value="{{ old('vencimento') }}">
+                    <label for="date" class="form-label">Plan Date</label>
+                    <input type="date" name="date" class="form-control" id="date" value="{{ old('date') }}">
                 </div>
 
-                <div class="col-md-4 col-sm-12">
+                {{-- <div class="col-md-4 col-sm-12">
                     <label for="situacao_conta_id" class="form-label">Situação da Conta</label>
                     <select name="situacao_conta_id" id="situacao_conta_id" class="form-select select2">
                         <option value="">Selecione</option>
@@ -47,10 +48,10 @@
                             <option value="">Nenhuma situação da conta encontrada</option>
                         @endforelse
                     </select>
-                </div>
+                </div> --}}
 
                 <div class="col-12">
-                    <button type="submit" class="btn btn-success btn-sm">Cadastrar</button>
+                    <button type="submit" class="btn btn-success btn-sm">Register</button>
                 </div>
 
             </form>
