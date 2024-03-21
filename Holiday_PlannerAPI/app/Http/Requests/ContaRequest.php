@@ -4,8 +4,6 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-use function PHPUnit\Framework\returnSelf;
-
 class ContaRequest extends FormRequest
 {
     /**
@@ -26,17 +24,19 @@ class ContaRequest extends FormRequest
         return [
             'nome' => 'required',
             'valor' => 'required|max:10',
-            'vencimento' => 'required', 
+            'vencimento' => 'required',
+            'situacao_conta_id' => 'required',
         ];
     }
 
     public function messages(): array
     {
-       return[
-        'nome.required' => 'Campo nome é obrigatório',
-        'valor.required' => 'Campo valor é obrigatório',
-        'valor.max' => 'Campo valor  só pode te no máximo 8 números',
-        'vencimento.required' => 'Campo vencimento é obrigatório',
-       ]; 
+        return[
+            'nome.required' => 'Campo nome é obrigatório!',
+            'valor.required' => 'Campo valor é obrigatório!',
+            'valor.max' => 'O preço só pode ter no máximo 8 números!',
+            'vencimento.required' => 'Campo vencimento é obrigatório!',
+            'situacao_conta_id.required' => 'Campo situação da conta é obrigatório!',
+        ];
     }
 }

@@ -142,3 +142,28 @@ Instalar a biblioteca para gerar PDF
 ```
 composer require barryvdh/laravel-dompdf
 ```
+
+Instalar o sweetalert2
+```
+npm install sweetalert2
+```
+
+Instalar o Select2
+```
+npm install select2
+```
+
+Instalar o jQuery
+```
+npm install jquery
+```
+
+Instalar o tema do Bootstrap 5 para Select2
+```
+npm install select2-bootstrap-5-theme
+```
+
+Instalar a dependência para gerar word
+```
+composer require phpoffice/phpword
+```

@@ -3,10 +3,25 @@
  * to our Laravel back-end. This library automatically handles sending the
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
-/* Importando o framework bootstrap */
+
+/* Importar o framework bootstrap */
 import 'bootstrap';
+
+// Importar jQuery
+import jQuery from 'jquery';
+window.$ = jQuery;
+
+// Importar select2
+import select2 from 'select2';
+select2();
+
+// Importar o axios
 import axios from 'axios';
 window.axios = axios;
+
+// Importar o SweetAlert2
+import Swal from 'sweetalert2';
+window.Swal = Swal;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
