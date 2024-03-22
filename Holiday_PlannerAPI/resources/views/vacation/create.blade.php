@@ -5,7 +5,7 @@
         <div class="card-header d-flex justify-content-between">
             <span>Vacation Plan Registration</span>
             <span>
-                <a href="{{ route('conta.index') }}" class="btn btn-info btn-sm ">Listar</a>
+                <a href="{{ route('vacation.index') }}" class="btn btn-info btn-sm ">Listar</a>
             </span>
         </div>
 
@@ -28,12 +28,12 @@
 
                 <div class="col-md-4 col-sm-12">
                     <label for="description" class="form-label">Description</label>
-                    <textarea name="description" id="description" cols="30" rows="10" class="form-control" placeholder="Plan Description" value="{{ old('valor') }}"></textarea>
+                    <textarea name="description" id="description" cols="30" rows="10" class="form-control" placeholder="Plan Description" value="{{ old('description') }}"></textarea>
                 </div>
 
                 <div class="col-md-4 col-sm-12">
-                    <label for="date" class="form-label">Plan Date</label>
-                    <input type="date" name="date" class="form-control" id="date" value="{{ old('date') }}">
+                    <label for="date_plan" class="form-label">Plan Date</label>
+                    <input type="date" name="date_plan" class="form-control" id="date_plan" value="{{ old('date_plan') }}">
                 </div>
 
                 {{-- <div class="col-md-4 col-sm-12">

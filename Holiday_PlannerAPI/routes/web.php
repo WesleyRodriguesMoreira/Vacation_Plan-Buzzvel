@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\ContaController;
 use App\Http\Controllers\VacationController;
 use Illuminate\Support\Facades\Route;
