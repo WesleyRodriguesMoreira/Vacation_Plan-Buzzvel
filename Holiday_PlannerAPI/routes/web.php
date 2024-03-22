@@ -8,9 +8,8 @@ use Illuminate\Support\Facades\Route;
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
+|  Here is recorded all the routes from the web to the API.
+|  These routes are loaded by the RouteServiceProvider and all of them will be assigned to the "web" middleware group.
 |
 */
 
@@ -21,19 +20,18 @@ Route::get('/', function () {
 Route::get('/create-vacation', [VacationController::class, 'create'])->name('vacation.create');
 Route::post('/store-vacation', [VacationController::class, 'store'])->name('vacation.store');
 
-
-// CONTAS
 Route::get('/index-conta', [ContaController::class, 'index'])->name('conta.index');
-Route::get('/create-conta', [ContaController::class, 'create'])->name('conta.create');
-Route::post('/store-conta', [ContaController::class, 'store'])->name('conta.store');
-Route::get('/show-conta/{conta}', [ContaController::class, 'show'])->name('conta.show');
-Route::get('/edit-conta/{conta}', [ContaController::class, 'edit'])->name('conta.edit');
+Route::get('/show-vacation/{vacation}', [VacationController::class, 'show'])->name('vacation.show');
+
+Route::get('/edit-vacation/{vacation}', [VacationController::class, 'edit'])->name('vacation.edit');
 Route::put('/update-conta/{conta}', [ContaController::class, 'update'])->name('conta.update');
+
 Route::delete('/destroy-conta/{conta}', [ContaController::class, 'destroy'])->name('conta.destroy');
-Route::get('/change-situation-conta/{conta}', [ContaController::class, 'changeSituation'])->name('conta.change-situation');
 
 Route::get('/gerar-pdf-conta', [ContaController::class, 'gerarPdf'])->name('conta.gerar-pdf');
 
-Route::get('/gerar-csv-conta', [ContaController::class, 'gerarCsv'])->name('conta.gerar-csv');
 
-Route::get('/gerar-word-conta', [ContaController::class, 'gerarWord'])->name('conta.gerar-word');
+
+// Route::get('/change-situation-conta/{conta}', [ContaController::class, 'changeSituation'])->name('conta.change-situation');
+// Route::get('/gerar-csv-conta', [ContaController::class, 'gerarCsv'])->name('conta.gerar-csv');
+// Route::get('/gerar-word-conta', [ContaController::class, 'gerarWord'])->name('conta.gerar-word');

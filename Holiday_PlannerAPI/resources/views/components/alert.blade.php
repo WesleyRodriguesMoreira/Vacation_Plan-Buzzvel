@@ -1,21 +1,22 @@
+{{-- Print a success message for any successful action --}}
 @if (session()->has('success'))
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            Swal.fire('Pronto!', "{{ session('success') }}", 'success');
+            Swal.fire('Ready!', "{{ session('success') }}", 'success');
         })
     </script>
-@endif
 
-@if ($errors->any())
+{{-- Print an error message for any unsuccessful action --}}
+@elseif ($errors->any())
     @php
-        $mensagem = '';
+        $message = '';
         foreach ($errors->all() as $error) {
-            $mensagem .= $error . '<br>';
+            $message .= $error . '<br>';
         }
     @endphp
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            Swal.fire('Error!', "{!! $mensagem !!}", 'error');
+            Swal.fire('Error!', "{!! $message !!}", 'error');
         })
     </script>
 @endif

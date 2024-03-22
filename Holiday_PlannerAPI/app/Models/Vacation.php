@@ -11,7 +11,7 @@ class Vacation extends Model
     protected $table = 'vacation_plan';
 
     // Indicate Which Columns Can Perform Operations
-    protected $fillable = ['title', 'description', 'date', 'local'];
+    protected $fillable = ['title', 'description', 'date_plan', 'local'];
 
     // public function situacaoConta()
     // {

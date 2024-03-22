@@ -1,15 +1,16 @@
+{{-- Inclusion of the predefined header  --}}
 @extends('layouts.admin')
-
 @section('content')
+
     <div class="card mt-4 mb-4 border-light shadow">
         <div class="card-header d-flex justify-content-between">
             <span>Vacation Plan Registration</span>
-            <span>
-                <a href="{{ route('vacation.index') }}" class="btn btn-info btn-sm ">Listar</a>
-            </span>
+            {{-- <span>
+                <a href="{{ route('vacation.index') }}" class="btn btn-info btn-sm ">List</a>
+            </span> --}}
         </div>
 
-        {{-- Verificar se existe a sessão success e imprimir o valor --}}
+        {{-- Check if there is a message and print the value --}}
         <x-alert />
 
         <div class="card-body">
@@ -55,7 +56,6 @@
                 </div>
 
             </form>
-
         </div>
     </div>
 @endsection

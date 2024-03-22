@@ -4,13 +4,14 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class VacationRequest extends FormRequest{
     
+    // Determines user authorization in the API
     public function authorize(): bool{
-        return false;
+        return true;
     }
     
-    public function rules(): array
-    {
-        return [
+    // Determines required fields
+    public function rules(): array{
+        return[
             'title' => 'required',
             'local' => 'required',
             'description' => 'required',
@@ -18,12 +19,12 @@ class VacationRequest extends FormRequest{
         ];
     }
 
-    public function messages(): array
-    {
+    // View a custom message
+    public function messages(): array{
         return[
             'title.required' => 'Title field is required!',
             'local.required' => 'Local field is required!',
-            'description.max' => 'Description field is required!',
+            'description.required' => 'Description field is required!',
             'date_plan.required' => 'Date field is required!',
         ];
     }
