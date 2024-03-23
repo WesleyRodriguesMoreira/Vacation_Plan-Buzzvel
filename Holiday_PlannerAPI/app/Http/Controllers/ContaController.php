@@ -140,6 +140,8 @@ class ContaController extends Controller
         }
     }
 
+    
+
     // Excluir a conta do banco de dados
     public function destroy(Conta $conta)
     {

@@ -18,14 +18,12 @@ Route::get('/', function () {
 });
 
 Route::get('/create-vacation', [VacationController::class, 'create'])->name('vacation.create');
-Route::post('/store-vacation', [VacationController::class, 'store'])->name('vacation.store');
-
 Route::get('/index-vacation', [VacationController::class, 'index'])->name('vacation.index');
 Route::get('/show-vacation/{vacation}', [VacationController::class, 'show'])->name('vacation.show');
-
 Route::get('/edit-vacation/{vacation}', [VacationController::class, 'edit'])->name('vacation.edit');
-Route::put('/update-conta/{conta}', [ContaController::class, 'update'])->name('conta.update');
 
+Route::post('/store-vacation', [VacationController::class, 'store'])->name('vacation.store');
+Route::put('/update-vacation/{vacation}', [ContaController::class, 'update'])->name('vacation.update');
 Route::delete('/vacation-conta/{vacation}', [ContaController::class, 'destroy'])->name('vacation.destroy');
 
 Route::get('/gerar-pdf-conta', [ContaController::class, 'gerarPdf'])->name('conta.gerar-pdf');

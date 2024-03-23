@@ -21,22 +21,22 @@ if (inputValor) {
     });
 }
 
-function confirmarExclusao(event, contaId) {
+function confirmDeletion(event, vacationId) {
 
     event.preventDefault();
 
     Swal.fire({
-        title: 'Tem certeza?',
-        text: 'Você não poderá reverter isso!',
+        title: 'Are you sure?',
+        text: "You won't be able to reverse this!",
         icon: 'warning',
         showCancelButton: true,
         cancelButtonColor: '#0d6efd',
-        cancelButtonText: 'Cancelar',
+        cancelButtonText: 'Cancel',
         confirmButtonColor: '#dc3545',
-        confirmButtonText: 'Sim, excluir!',
+        confirmButtonText: 'Yes, delete!',
     }).then((result) => {
         if (result.isConfirmed) {
-            document.getElementById(`formExcluir${contaId}`).submit();
+            document.getElementById(`formDelete${vacationId}`).submit();
         }
     })
 
