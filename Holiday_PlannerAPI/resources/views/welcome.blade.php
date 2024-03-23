@@ -11,7 +11,7 @@
 
         <h1>Projeto Laravel</h1>
 
-        <a href="{{ route('conta.index') }}">Listar as Contas</a>
+        <a href="{{ route('vacation.index') }}">Listar as Contas</a>
         
     </body>
 </html>

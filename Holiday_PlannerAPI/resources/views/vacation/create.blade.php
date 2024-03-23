@@ -5,9 +5,9 @@
     <div class="card mt-4 mb-4 border-light shadow">
         <div class="card-header d-flex justify-content-between">
             <span>Vacation Plan Registration</span>
-            {{-- <span>
+            <span>
                 <a href="{{ route('vacation.index') }}" class="btn btn-info btn-sm ">List</a>
-            </span> --}}
+            </span>
         </div>
 
         {{-- Check if there is a message and print the value --}}

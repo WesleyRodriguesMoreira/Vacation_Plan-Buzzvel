@@ -47,33 +47,33 @@ class VacationController extends Controller
         }
      }
 
-    //  // Listar as contas
-    // public function index(Request $request)
-    // {
+     // Listar os Planos de Férias
+    public function index(Request $request)
+    {
 
-    //     // Recuperar os registros do banco dados
-    //     $contas = Conta::when($request->has('nome'), function ($whenQuery) use ($request) {
-    //         $whenQuery->where('nome', 'like', '%' . $request->nome . '%');
-    //     })
-    //         ->when($request->filled('data_inicio'), function ($whenQuery) use ($request) {
-    //             $whenQuery->where('vencimento', '>=', \Carbon\Carbon::parse($request->data_inicio)->format('Y-m-d'));
-    //         })
-    //         ->when($request->filled('data_fim'), function ($whenQuery) use ($request) {
-    //             $whenQuery->where('vencimento', '<=', \Carbon\Carbon::parse($request->data_fim)->format('Y-m-d'));
-    //         })
-    //         ->with('situacaoConta')
-    //         ->orderByDesc('created_at')
-    //         ->paginate(10)
-    //         ->withQueryString();
+        // Recuperar os registros do banco dados
+        $vacation = Vacation::when($request->has('title'), function ($whenQuery) use ($request){
+            $whenQuery->where('title', 'like', '%' . $request->title . '%');
+        })
+            ->when($request->has('local'), function ($whenQuery) use ($request){
+                $whenQuery->where('local', 'like', '%' . $request->local . '%');
+            })
+            ->when($request->filled('date_plan'), function ($whenQuery) use ($request) {
+                $whenQuery->where('date_plan', '=', \Carbon\Carbon::parse($request->date_plan)->format('Y-m-d'));
+            })
+            // ->with('situacaoConta')
+            ->orderByDesc('created_at')
+            ->paginate(5)
+            ->withQueryString();
 
-    //     // Carregar a VIEW
-    //     return view('contas.index', [
-    //         'contas' => $contas,
-    //         'nome' => $request->nome,
-    //         'data_inicio' => $request->data_inicio,
-    //         'data_fim' => $request->data_fim,
-    //     ]);
-    // }
+        // Load the VIEW
+        return view('vacation.index', [
+            'vacation' => $vacation,
+            'title' => $request->title,
+            'local' => $request->local,
+            'date_plan' => $request->date_plan,
+        ]);
+    }
 
 
     // === Vacation Plan Details ===
