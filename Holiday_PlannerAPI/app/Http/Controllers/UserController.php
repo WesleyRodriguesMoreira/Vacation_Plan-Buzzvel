@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
-use App\Http\Resources\UserResource;
+use App\Http\Resources\UserResource; //
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -14,10 +14,11 @@ use Illuminate\Support\Str;
 
 class UserController extends Controller{
 
-
+    /** @var function index Realizar uma buscar de usuários(exiber todos) */
     public function index(Request $request){
         try{
-            // Realizar uma pesquisa pelo nome e e-mail
+
+            /**  @var string $users Realizar uma pesquisa pelo nome e e-mail do usuário */
             $users = User::when($request->has('name'),function($whenQuery) use ($request){
                 $whenQuery->where('name','like','%' . $request->name . '%');
             })
@@ -26,8 +27,8 @@ class UserController extends Controller{
             })
             ->orderByDesc('created_at')->paginate(10)->withQueryString();
         
-
-            // Retorne a coleção de usuários usando o UserResource
+            
+            /** @var class UserResource Retorna a coleção de usuários usando o método resource  */
             return UserResource::collection($users);
 
         }catch (QueryException $e){
@@ -50,10 +51,14 @@ class UserController extends Controller{
 
 
 
-    /** @var int $user Recebe o id em forma de parâmetro, que vem da rota (api.php) */
+    /** @var function show Realizar uma buscar de um único usuário
+     *  @var class User É a model de usuários                        
+     *  @var int $user Recebe o id em forma de parâmetro, que vem da rota ( /user/{user} )
+    */
     public function show(User $user){
         try{
-            // Obtenha o id do usuário e retorna os dados
+            
+            /** @var class UserResource Retorna a coleção de um único usuário usando o método resource  */
             return new UserResource($user);
 
         }catch (QueryException $e){
@@ -63,7 +68,9 @@ class UserController extends Controller{
     
             // Retorne uma resposta de erro em JSON
             return response()->json(['error' => 'Erro, usuário não encontrado.'], 404);
+
         } catch (Exception $e) {
+
             // Se ocorrer qualquer outro tipo de exceção, registre o erro no log
             Log::error('Erro inesperado: ' . $e->getMessage());
     
@@ -74,13 +81,18 @@ class UserController extends Controller{
 
 
 
-
+    /** @var function store Realizar um cadastro de usuário
+     *  @var string $request Recebe os dados validados
+    */
     public function store(UserRequest $request){
         try {
-            // Validar o Formulário
+
+            /** @var string $validatedData Recebe a validação ativa */
             $validatedData = $request->validated();
     
-            // Cadastra no Banco de Dados, na tabela contas
+            /** @var strin $user Cadastra no Banco de Dados, na tabela user
+             *  @var class User É a model de usuários
+            */ 
             $user = User::create([
                 'nome' => $validatedData['name'],
                 'email' => $validatedData['email'],
@@ -95,7 +107,8 @@ class UserController extends Controller{
             // Retorne uma resposta em JSON indicando que o usuário foi cadastrado com sucesso
             return response()->json(['message' => 'Usuário cadastrado com sucesso', 'user' => $user], 201);
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
+
             // Salva no log
             Log::warning('Usuário não cadastrado: ' . $e->getMessage());
     
@@ -104,5 +117,32 @@ class UserController extends Controller{
         }
     }
     
+    // ===Editar os dados do banco de dados===
+    public function update(UserRequest $request, User $user){
+        // Validar o formulário
+        $validatedData = $request->validated();
+
+        try {
+            // Editar os dados
+            $user->update([
+                'nome' => $validatedData['nome'],
+                'valor' => str_replace(',', '.', str_replace('.', '', $validatedData['valor'])),
+                'vencimento' => $validatedData['vencimento'],
+            ]);
+
+            // Salvar no log
+            Log::info('Conta editada com sucesso', ['id' => $user->id, 'user' => $user]);
+
+            // Retornar uma resposta JSON indicando sucesso
+            return response()->json(['message' => 'Conta Editada com Sucesso', 'user' => $user], 200);
+        } catch (\Exception $e) {
+            // Salvar no log
+            Log::warning('Conta não editada: ' . $e->getMessage());
+
+            // Retornar uma resposta JSON indicando erro
+            return response()->json(['message' => 'Erro no sistema, Conta não editada :('], 500);
+        }
+    }
+
 
 }
