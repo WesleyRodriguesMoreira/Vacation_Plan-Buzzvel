@@ -14,7 +14,10 @@ use Illuminate\Support\Str;
 
 class UserController extends Controller{
 
-    /** @var function index Realizar uma buscar de usuários(exiber todos) */
+    /** @var function index Realizar uma buscar de usuários (exiber todos)
+     *  @var class Request Representa uma requisição
+     *  @var string $request Atribuir os valores da class
+    */
     public function index(Request $request){
         try{
 
@@ -50,7 +53,6 @@ class UserController extends Controller{
     }
 
 
-
     /** @var function show Realizar uma buscar de um único usuário
      *  @var class User É a model de usuários                        
      *  @var int $user Recebe o id em forma de parâmetro, que vem da rota ( /user/{user} )
@@ -80,8 +82,8 @@ class UserController extends Controller{
     }
 
 
-
     /** @var function store Realizar um cadastro de usuário
+     *  @var class UserRequest Realizar uma validação
      *  @var string $request Recebe os dados validados
     */
     public function store(UserRequest $request){
@@ -90,9 +92,7 @@ class UserController extends Controller{
             /** @var string $validatedData Recebe a validação ativa */
             $validatedData = $request->validated();
     
-            /** @var strin $user Cadastra no Banco de Dados, na tabela user
-             *  @var class User É a model de usuários
-            */ 
+            /** @var strin $user Cadastra no Banco de Dados, na tabela user */ 
             $user = User::create([
                 'nome' => $validatedData['name'],
                 'email' => $validatedData['email'],
@@ -116,33 +116,64 @@ class UserController extends Controller{
             return response()->json(['message' => 'Erro interno do servidor'], 500);
         }
     }
-    
-    // ===Editar os dados do banco de dados===
-    public function update(UserRequest $request, User $user){
-        // Validar o formulário
-        $validatedData = $request->validated();
 
+
+    /** @var function update Realizar uma edição de usuário
+     *  @var int $user Recebe o id em forma de parâmetro, que vem da rota ( /update/{user} )
+    */
+    public function update(UserRequest $request, User $user){
         try {
-            // Editar os dados
+
+            /** @var string $validatedData Recebe a validação ativa */
+            $validatedData = $request->validated();
+
+            /** @var strin $user Editar no Banco de Dados, na tabela user */ 
             $user->update([
-                'nome' => $validatedData['nome'],
-                'valor' => str_replace(',', '.', str_replace('.', '', $validatedData['valor'])),
-                'vencimento' => $validatedData['vencimento'],
+                'nome' => $validatedData['name'],
+                'email' => $validatedData['email'],
+                'senha' => bcrypt($validatedData['password']), // Use bcrypt() para criptografar a senha de forma segura
             ]);
 
             // Salvar no log
-            Log::info('Conta editada com sucesso', ['id' => $user->id, 'user' => $user]);
+            Log::info('Usuário editado com sucesso.', ['id' => $user->id, 'user' => $user]);
 
             // Retornar uma resposta JSON indicando sucesso
             return response()->json(['message' => 'Conta Editada com Sucesso', 'user' => $user], 200);
-        } catch (\Exception $e) {
+
+        } catch (Exception $e) {
+
             // Salvar no log
-            Log::warning('Conta não editada: ' . $e->getMessage());
+            Log::warning('Usuário não editado: ' . $e->getMessage());
 
             // Retornar uma resposta JSON indicando erro
-            return response()->json(['message' => 'Erro no sistema, Conta não editada :('], 500);
+            return response()->json(['message' => 'Erro no sistema, Usuário não editado :('], 500);
         }
     }
+
+
+    /** @var function destroy Realizar um delete de usuário
+     *  @var int $user Recebe o id em forma de parâmetro, que vem da rota ( /destroy/{user} )
+     */
+    public function destroy(User $user){
+        try {
+            
+            /** @var strin $user Realizar um delete de usuário  */
+            $user->delete();
+
+            // Salvar no log
+            Log::info('Usuário excluído com sucesso.', ['id' => $user->id]);
+
+            // Retornar uma resposta JSON indicando sucesso
+            return response()->json(['message' => 'Usuário excluído com sucesso'], 200);
+
+        } catch (Exception $e) {
+            // Salvar no log
+            Log::error('Erro ao excluir usuário: ' . $e->getMessage());
+
+            // Retornar uma resposta JSON indicando erro
+            return response()->json(['message' => 'Erro ao excluir usuário'], 500);
+        }
+}
 
 
 }

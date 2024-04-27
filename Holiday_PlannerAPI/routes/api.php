@@ -12,6 +12,12 @@ use Illuminate\Support\Facades\Route;
     // Utilizar o "{user}" para manda para a controller
     Route::get('/update/{user}' , [UserController::class, 'update']);
 
+    // Utilizar o "{user}" para manda para a controller
+    Route::get('/destroy/{user}' , [UserController::class, 'destroy']);
+
+    // Utilizar o "{user}" para manda para a controller
+    Route::get('/destroy_log/{user}' , [UserController::class, 'destroy_log']);
+
 
 
 
