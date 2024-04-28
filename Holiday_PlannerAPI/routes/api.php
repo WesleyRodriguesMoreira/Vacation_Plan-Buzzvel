@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
     Route::get('/destroy/{user}' , [UserController::class, 'destroy']);
 
     // Utilizar o "{user}" para manda para a controller
-    Route::get('/destroy_log/{user}' , [UserController::class, 'destroy_log']);
+    // Route::get('/destroy_log/{user}' , [UserController::class, 'destroy_log']);
 
 
 

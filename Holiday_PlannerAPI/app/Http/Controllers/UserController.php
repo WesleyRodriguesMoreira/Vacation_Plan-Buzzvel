@@ -173,7 +173,19 @@ class UserController extends Controller{
             // Retornar uma resposta JSON indicando erro
             return response()->json(['message' => 'Erro ao excluir usuário'], 500);
         }
-}
+    }
+
+
+    /** @var function destroy Realizar um delete de usuário
+     *  @var int $user Recebe o id em forma de parâmetro, que vem da rota ( /destroy/{user} )
+     */
+    // public function destroy_log(User $user){
+
+    // }
+
+
+
+
 
 
 }
