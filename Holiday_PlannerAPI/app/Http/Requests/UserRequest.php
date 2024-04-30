@@ -33,7 +33,7 @@ class UserRequest extends FormRequest
        return[
         'name.required' => 'Campo nome é obrigatório',
         'email.required' => 'Campo email é obrigatório',
-        'password.min' => 'Campo valor só pode te no minímo 5 caracteres',
+        'password.min' => 'Campo senha só pode te no minímo 5 caracteres',
         'password.required' => 'Campo senha é obrigatório',
        ]; 
     }

@@ -90,15 +90,15 @@ class UserController extends Controller{
         try {
 
             /** @var string $validatedData Recebe a validação ativa */
-            $validatedData = $request->validated();
+            $validatedData = $request->validated();  
     
             /** @var strin $user Cadastra no Banco de Dados, na tabela user */ 
             $user = User::create([
-                'nome' => $validatedData['name'],
+                'name' => $validatedData['name'],
                 'email' => $validatedData['email'],
                 'email_verified_at' => now(),
                 'remember_token' => Str::random(10),
-                'senha' => bcrypt($validatedData['password']), // Use bcrypt() para criptografar a senha de forma segura
+                'password' => bcrypt($validatedData['password']), // Use bcrypt() para criptografar a senha de forma segura
             ]);
     
             // Salva no log
