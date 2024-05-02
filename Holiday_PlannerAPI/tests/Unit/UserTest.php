@@ -15,8 +15,8 @@ class UserTest extends TestCase{
     /** @var function testStoreUser Criar um teste de cadastro de usuário  */
     public function testStoreUser(){
 
-        /** @var strin $controller Receber os dados da model user */
-        $controller = new UserController();
+        /** @var strin $user Receber os dados da model user */
+        $user = new UserController();
         $request = new UserRequest([
             'name' => 'Olá, Mundo!',
             'email' => 'olamundo@gmail.com',
@@ -31,7 +31,7 @@ class UserTest extends TestCase{
         // Desabilitar o log
         Log::shouldReceive('info')->andReturnNull();
 
-        $response = $controller->store($request);
+        $response = $user->store($request);
 
         // Retorna uma mensagem de sucesso
         $this->assertEquals(201, $response->status());
