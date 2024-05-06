@@ -105,15 +105,16 @@ class UserController extends Controller{
             Log::info('Usuário cadastrado com sucesso', ['id' => $user->id, 'conta' => $user]);
     
             // Retorne uma resposta em JSON indicando que o usuário foi cadastrado com sucesso
-            return response()->json(['message' => 'Usuário cadastrado com sucesso', 'user' => $user], 201);
-
+            // return response()->json(['message' => 'Usuário cadastrado com sucesso', 'user' => $user], 201);
+            return true;
         } catch (Exception $e) {
 
             // Salva no log
             Log::warning('Usuário não cadastrado: ' . $e->getMessage());
     
             // Se ocorrer qualquer outro tipo de exceção, retorne uma resposta em JSON com uma mensagem de erro genérica
-            return response()->json(['message' => 'Erro interno do servidor'], 500);
+            // return response()->json(['message' => 'Erro interno do servidor'], 500);
+            return false;
         }
     }
 
